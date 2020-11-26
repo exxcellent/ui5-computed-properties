@@ -1,0 +1,45 @@
+<mvc:View
+        controllerName="ui5-demo.view.App"
+        height="100%"
+        xmlns:core="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m">
+
+    <App id="idAppControl">
+        <Page showHeader="false" enableScrolling="false" class="sapUiNoPadding">
+
+            <OverflowToolbar class="">
+                <ToolbarSpacer width="50px"/>
+                <Button text="Simple1" type="Transparent" press="onNav">
+                    <customData>
+                        <core:CustomData key="dest" value="simple1"/>
+                    </customData>
+                </Button>
+                <Button text="Simple2" type="Transparent" press="onNav">
+                    <customData>
+                        <core:CustomData key="dest" value="simple2"/>
+                    </customData>
+                </Button>
+                <Button text="Simple3" type="Transparent" press="onNav">
+                    <customData>
+                        <core:CustomData key="dest" value="simple3"/>
+                    </customData>
+                </Button>
+                <ToolbarSpacer width="50px"/>
+                <Button text="Table" type="Transparent" press="onNav">
+                    <customData>
+                        <core:CustomData key="dest" value="table"/>
+                    </customData>
+                </Button>
+            </OverflowToolbar>
+
+            <NavContainer id="contentContainer" class="" autoFocus="false" height="calc(100%)">
+                <!-- content goes here @see manifest.json routing section -->
+            </NavContainer>
+
+        </Page>
+
+<!--        <mvc:XMLView viewName="ui5-demo.view.home.Home"></mvc:XMLView>-->
+    </App>
+
+</mvc:View>

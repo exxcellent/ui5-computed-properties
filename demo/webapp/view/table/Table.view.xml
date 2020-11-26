@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns:table="sap.ui.table"
+          xmlns:util="ui5-demo.util"
+          controllerName="ui5-demo.view.table.Table"
+          xmlns="sap.m"
+>
+    <Page id="home"
+          showHeader="true"
+          showFooter="false"
+          enableScrolling="false"
+          title="Table"
+    >
+
+        <table:Table id="BenutzerTable"
+                     selectionMode="None"
+                     visibleRowCountMode="Auto"
+                     rows="{local>/wrappedData}"
+        >
+            <table:toolbar>
+                <Toolbar>
+                    <Title id="title" text="Benutzer"/>
+                    <Text text="{local>/count} rows"/>
+                    <ToolbarSpacer/>
+                    <ToolbarSpacer width="20px"/>
+                    <Button icon="sap-icon://add"
+                            press=".doAdd"/>
+                </Toolbar>
+            </table:toolbar>
+            <table:columns>
+                <table:Column
+                        id="vorname"
+                        width="11rem"
+                        sortProperty="obj/vorname">
+                    <Label text="Vorname"/>
+                    <table:template>
+                        <Text id="rowTemplate" text="{local>obj/vorname}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column
+                        id="nachname"
+                        width="11rem"
+                        sortProperty="obj/nachname">
+                    <Label text="Nachname"/>
+                    <table:template>
+                        <Text text="{local>obj/nachname}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column
+                        id="email"
+                        width="20rem"
+                        sortProperty="obj/email">
+                    <Label text="E-Mail"/>
+                    <table:template>
+                        <Text text="{local>obj/email}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column
+                        id="prettyEmail"
+                        width="25rem"
+                        sortProperty="temp/prettyEmail">
+                    <Label text="Pretty E-Mail"/>
+                    <table:template>
+                        <Text text="{local>temp/prettyEmail}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column
+                        id="actions"
+                        width="25rem">
+                    <table:template>
+                        <HBox>
+                            <Button text="Edit"
+                                    visible="{= !%{local>temp/editMode} }"
+                                    press=".startEditing"/>
+                            <Input value="{local>temp/email}"
+                                   visible="{= !!%{local>temp/editMode} }"/>
+                            <Button text="Save"
+                                    visible="{= !!%{local>temp/editMode} }"
+                                    press=".saveChanges"/>
+                            <Button text="Cancel"
+                                    visible="{= !!%{local>temp/editMode} }"
+                                    press=".cancelEditing"/>
+                        </HBox>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+
+    </Page>
+</mvc:View>

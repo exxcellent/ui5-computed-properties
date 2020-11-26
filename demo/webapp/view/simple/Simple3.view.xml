@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          controllerName="ui5-demo.view.simple.Simple3"
+          xmlns="sap.m"
+          xmlns:forms="sap.ui.layout.form"
+          xmlns:util="ui5-demo.util"
+>
+    <Page id="home"
+          showHeader="true"
+          showFooter="false"
+          enableScrolling="false"
+          title="Simple3"
+    >
+        <forms:SimpleForm
+                width="700px"
+                layout="ResponsiveGridLayout"
+                editable="true"
+                columnsL="1"
+                columnsXL="1"
+                labelSpanM="4">
+
+            <Label text="Login"/>
+            <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/login}"/>
+
+            <Label text="Vorname"/>
+            <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/vorname}"/>
+
+            <Label text="Nachname"/>
+            <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/nachname}"/>
+
+            <Label text="E-Mail"/>
+            <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/email}"/>
+
+            <Label/>
+            <Button text="Editieren" press=".startEditing"
+                    visible="{= !%{local>/editMode} }" />
+
+            <Label/>
+            <!-- enabled if editMode && changed -->
+            <Button text="Speichern" press=".saveChanges"
+                    visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
+            <!-- visible if editMode && changed -->
+            <Button text="Zurücksetzen" press=".cancelEditing"
+                    visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
+
+            <Label/>
+            <!-- visible if editMode && !changed -->
+            <Button text="Abbrechen" press=".cancelEditing"
+                    visible="{= %{local>/editMode} &amp;&amp; !%{local>/changed} }" />
+
+            <Label/>
+            <!-- visible if editMode && changed -->
+            <Text class="red" text="Achtung: Die Änderungen sind noch nicht gespeichert."
+                  visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
+
+        </forms:SimpleForm>
+
+    </Page>
+</mvc:View>

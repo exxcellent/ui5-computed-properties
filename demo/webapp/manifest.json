@@ -1,0 +1,106 @@
+{
+  "_version": "1.0.0",
+  "start_url": "index.html",
+  "sap.app": {
+    "id": "ui5-demo",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "${version}"
+    },
+    "title": "DEMO"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": false
+    },
+    "supportedThemes": [
+      "sap_belize"
+    ],
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "resources": {
+      "css": [
+        {
+          "uri": "css/styles.css"
+        }
+      ]
+    },
+    "dependencies": {
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "rootView": "ui5-demo.view.App",
+    "handleValidation": true,
+    "config": {
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": false
+    },
+    "resourceRoots": {
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "ui5-demo.view",
+        "controlId": "contentContainer",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "bypassed": {
+          "target": "simple1"
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "simple1",
+          "name": "simple1",
+          "target": "simple1"
+        },
+        {
+          "pattern": "simple2",
+          "name": "simple2",
+          "target": "simple2"
+        },
+        {
+          "pattern": "simple3",
+          "name": "simple3",
+          "target": "simple3"
+        },
+        {
+          "pattern": "table",
+          "name": "table",
+          "target": "table"
+        }
+      ],
+      "targets": {
+        "table": {
+          "viewName": "table/Table"
+        },
+        "simple1": {
+          "viewName": "simple/Simple1"
+        },
+        "simple2": {
+          "viewName": "simple/Simple2"
+        },
+        "simple3": {
+          "viewName": "simple/Simple3"
+        }
+      }
+    }
+  }
+}

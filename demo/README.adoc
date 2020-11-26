@@ -1,0 +1,59 @@
+= UI5-Tooling
+
+Für Entwicklung und Auslieferung wird das UI5-Tooling Framework verwendet.
+Die Doku dazu findet man unter https://github.com/SAP/ui5-tooling.
+
+== Allgemeine Infos
+
+Folgende NPM-Skripte sind aktuell verfügbar und können mit `npm run <script>` aufgerufen werden.
+
+* `serve`: Startet einen Webserver für das aktuelle Projekt, der auf http://localhost:5001 läuft.
+* `lint`: Führt die ESLint Code Validierung.
+* `karma`: Startet die Testausführung mit Karma (Konfiguration: karma.conf.js)
+* `karma-ci`: Startet die Testausführung mit Karma (Konfiguratin: karma-ci.conf.js)
+* `test-ci`: Führt die ESLint Code Validierung durch und führt die Tests im CI-Mode aus.
+* `build`: Leert zunächst das /dist-Verzeichnis und baut dann den UI5-Client im Self-Contained-Modus (für die Entwicklung nicht notwendig).
+* `dist`: Für das Skript `build` aus.
+Wird in der pom.xml verwendet um den Client für die Auslieferung zu bauen.
+* `serve-dist`: Stellt den gebauten Inhalt des /dist-Folders auf http://localhost:5001 bereitstellt.
+Kann zum Test des ausgelieferten Builds verwendet werden.
+
+== Entwicklung
+
+Für die Entwicklung sind folgende Befehle in dieser Reihenfolge auszuführen:
+
+* `npm install`: Initial (und immer bei Änderungen in der package.json) müssen zunächst die Abhängigkeiten installiert werden.
+* `npm run serve`: Startet den Webserver, öffnet die Seite im Defaultbrowser unter http://localhost:5001/index.html und startet den Proxy.
+Änderungen werden unmittelbar bereitgestellt, es ist jedoch kein Live-Reload verfügbar, die Seite muss manuell refresht werden.
+
+== QA (lokal)
+
+=== Statische Code-Analyse
+
+* `npm run lint`: Prüft den Sourcecode auf die in .eslintrc hinterlegten Regeln.
+
+=== QUnit Tests
+
+* Manuell: bei laufendem Entwicklungsserver können die Tests unter http://localhost:5001/test/unit/unitTests.qunit.html manuell aufgerufen und gestartet werden.
+
+== Auslieferung
+
+* `npm run build`: Baut den UI5-Client.
+* `npm run dist`: Baut den UI5-Client, entspricht npm run build.
+* `npm run serve-dist`: Zum lokalen Test des gebauten UI5-Clients.
+Startet einen Webserver unter http://localhost:5001, der den Dist-Build zur Verfügung stellt.
+
+== UI5-Bibliotheken
+
+Die Versionen der verschiedenen Libs (sap.ui.core, sap.m usw.) müssen in der package.json aktualisiert werden.
+Wenn neue UI5-Libs benötigt werden, müssen diese in der package.json und in der manifest.json (libs) eingetragen werden.
+
+== Styling mit LESS
+
+Das Styling wird in LESS definiert und durch einen IDEA File Watcher nach CSS (ebenfalls versioniert) übersetzt.
+Dies wird folgendermaßen eingerichtet (siehe auch https://www.jetbrains.com/help/idea/transpiling-sass-less-and-scss-to-css.html):
+
+* An der Kommandozeile LESS über NPM installieren: `npm install --global less`
+* Unter Settings das Plugin "File Watchers" installieren.
+Die Konfiguration ist eingecheckt.
+* Bei einer Änderung an der styles.less sollte sich automatisch die styles.css ändern!
