@@ -18,14 +18,14 @@ sap.ui.define([
             parentElement.addAggregation("dependents", derivedVariable);
         },
 
-        buildFuncExpressionBinding: function (funcModel, func, ...params) {
+        buildFuncExpressionBinding: function (funcModel, funcModelName, func, ...params) {
             const randomNr = Math.floor(Math.random() * 1000000);
             const funcName = `${func.name}_${randomNr}`;
             const paramsString = params
                 .map(p => `%{${p}}`)
                 .join(",");
             funcModel.setProperty("/" + funcName, func);
-            return `{= %{$funcs>/${funcName}}(${paramsString}) }`;
+            return `{= %{${funcModelName}>/${funcName}}(${paramsString}) }`;
         }
 
     };

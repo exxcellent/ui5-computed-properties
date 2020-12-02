@@ -70,9 +70,10 @@ sap.ui.define([
             ComputedPropertyUtil.addComputedProperty(parentElement, varName, expressionBinding);
         },
         buildFuncExpressionBinding: function (func, ...params) {
-            const funcModel = this.getModel("$funcs") || new JSONModel({});
-            this.setModel(funcModel, "$funcs")
-            return ComputedPropertyUtil.buildFuncExpressionBinding(funcModel, func, ...params);
+            const funcModelName = "$funcs";
+            const funcModel = this.getModel(funcModelName) || new JSONModel({});
+            this.setModel(funcModel, funcModelName)
+            return ComputedPropertyUtil.buildFuncExpressionBinding(funcModel, funcModelName, func, ...params);
         }
 
     });
