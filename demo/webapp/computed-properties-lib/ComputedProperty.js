@@ -5,7 +5,7 @@ sap.ui.define([
 ) {
     "use strict";
 
-    return Element.extend("ui5-demo.util.ComputedProperty", {
+    return Element.extend("computed-properties-lib.ComputedProperty", {
         metadata: {
             properties: {
                 label: {type: "string"},

@@ -3,7 +3,6 @@
           controllerName="ui5-demo.view.simple.Simple3"
           xmlns="sap.m"
           xmlns:forms="sap.ui.layout.form"
-          xmlns:util="ui5-demo.util"
 >
     <Page id="home"
           showHeader="true"

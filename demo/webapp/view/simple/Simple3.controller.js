@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/base/util/deepClone",
     "sap/ui/model/json/JSONModel",
-    "ui5-demo/util/BaseController",
+    "../BaseController",
     "ui5-demo/model/DataService",
 ], function (
     deepClone,

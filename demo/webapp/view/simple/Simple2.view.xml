@@ -3,7 +3,7 @@
           controllerName="ui5-demo.view.simple.Simple2"
           xmlns="sap.m"
           xmlns:forms="sap.ui.layout.form"
-          xmlns:util="ui5-demo.util"
+          xmlns:cpl="computed-properties-lib"
 >
     <Page id="home"
           showHeader="true"
@@ -12,7 +12,7 @@
           title="Simple2"
     >
         <dependents>
-            <util:ComputedProperty var="{local>/changed}"
+            <cpl:ComputedProperty var="{local>/changed}"
                                    value="{= %{/login}!==%{orig>/login} || %{/vorname}!==%{orig>/vorname} ||
                                              %{/nachname}!==%{orig>/nachname} || %{/email}!==%{orig>/email} }"/>
         </dependents>

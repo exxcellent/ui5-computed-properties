@@ -39,7 +39,6 @@
 
         </Page>
 
-<!--        <mvc:XMLView viewName="ui5-demo.view.home.Home"></mvc:XMLView>-->
     </App>
 
 </mvc:View>

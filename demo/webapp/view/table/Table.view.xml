@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mvc:View xmlns:mvc="sap.ui.core.mvc"
           xmlns:table="sap.ui.table"
-          xmlns:util="ui5-demo.util"
           controllerName="ui5-demo.view.table.Table"
           xmlns="sap.m"
 >

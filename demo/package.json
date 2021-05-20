@@ -2,7 +2,6 @@
   "name": "ui5-computed-properties",
   "version": "2.0.0",
   "description": "Computed Properties for UI5 - lib and demo",
-  "main": "index.html",
   "scripts": {
     "serve": "ui5 serve -p 5001",
     "lint": "eslint webapp",

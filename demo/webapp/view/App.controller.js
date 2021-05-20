@@ -4,7 +4,7 @@
  * Basic functionality to be shared among all controllers should be implemented in the dedicated {@see BaseController}.
  */
 sap.ui.define([
-    "ui5-demo/util/BaseController"
+    "./BaseController"
 ], function (
     BaseController
 ) {
@@ -21,12 +21,6 @@ sap.ui.define([
         onNav: function (oEvent) {
             const destination = oEvent.getSource().data("dest");
             this.getRouter().navTo(destination);
-        },
-        onNavToSimple: function () {
-            this.getRouter().navTo("simple")
-        },
-        onNavToTable: function () {
-            this.getRouter().navTo("table")
         }
     });
 });
