@@ -1,6 +1,6 @@
 specVersion: '1.0'
 metadata:
-  name: demo-lt-ui5-practices
+  name: ui5-computed-properties
 type: application
 resources:
   configuration:
@@ -11,7 +11,7 @@ builder:
       afterTask: replaceVersion
       debug: true
       excludePatterns:
-        - "lib/"
+        - "build/"
 ---
 specVersion: '1.0'
 metadata:
@@ -19,4 +19,4 @@ metadata:
 kind: extension
 type: task
 task:
-  path: lib/task/transpile.js
+  path: build/task/transpile.js

@@ -9,12 +9,7 @@ Folgende NPM-Skripte sind aktuell verfügbar und können mit `npm run <script>` 
 
 * `serve`: Startet einen Webserver für das aktuelle Projekt, der auf http://localhost:5001 läuft.
 * `lint`: Führt die ESLint Code Validierung.
-* `karma`: Startet die Testausführung mit Karma (Konfiguration: karma.conf.js)
-* `karma-ci`: Startet die Testausführung mit Karma (Konfiguratin: karma-ci.conf.js)
-* `test-ci`: Führt die ESLint Code Validierung durch und führt die Tests im CI-Mode aus.
-* `build`: Leert zunächst das /dist-Verzeichnis und baut dann den UI5-Client im Self-Contained-Modus (für die Entwicklung nicht notwendig).
-* `dist`: Für das Skript `build` aus.
-Wird in der pom.xml verwendet um den Client für die Auslieferung zu bauen.
+* `dist`: Leert zunächst das /dist-Verzeichnis und baut dann den UI5-Client im Self-Contained-Modus (für die Entwicklung nicht notwendig).
 * `serve-dist`: Stellt den gebauten Inhalt des /dist-Folders auf http://localhost:5001 bereitstellt.
 Kann zum Test des ausgelieferten Builds verwendet werden.
 
