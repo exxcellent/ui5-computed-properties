@@ -23,9 +23,9 @@
   "author": "Martin Kaeser",
   "license": "Apache-2.0",
   "dependencies": {
-    "@openui5/sap.ui.core": "1.71.21",
-    "@openui5/sap.m": "1.71.21",
-    "@openui5/sap.ui.table": "1.71.21",
-    "@openui5/themelib_sap_belize": "1.71.21"
+    "@openui5/sap.ui.core": "1.90.1",
+    "@openui5/sap.m": "1.90.1",
+    "@openui5/sap.ui.table": "1.90.1",
+    "@openui5/themelib_sap_belize": "1.90.1"
   }
 }
