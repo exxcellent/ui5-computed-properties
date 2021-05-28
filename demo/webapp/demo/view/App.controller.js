@@ -19,8 +19,7 @@ sap.ui.define([
         },
 
         onNav: function (oEvent) {
-            const destination = oEvent.getSource().data("dest");
-            this.getRouter().navTo(destination);
+            this.getRouter().navTo(oEvent.getSource().data("dest"));
         }
     });
 });

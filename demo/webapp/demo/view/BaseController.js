@@ -5,7 +5,7 @@ sap.ui.define([
 ) {
     "use strict";
 
-    const CONTENT_DENSITY_CLASS = "sapUiSizeCompact";
+    var CONTENT_DENSITY_CLASS = "sapUiSizeCompact";
 
     /**
      * Base Controller for common functionality among all pages.
@@ -45,14 +45,14 @@ sap.ui.define([
 
         getBindingContextForEvent: function (oEvent, sModel) {
             function setProperty(sPath, oValue) {
-                const model = this.getModel();
-                const fullPath = this.getPath(sPath);
+                var model = this.getModel();
+                var fullPath = this.getPath(sPath);
                 model.setProperty(fullPath, oValue);
             }
 
-            const bindingContext = oEvent.getSource().getBindingContext(sModel || undefined);
+            var bindingContext = oEvent.getSource().getBindingContext(sModel || undefined);
             if (!bindingContext) {
-                throw Error(`No binding context for model '${sModel}' found!`);
+                throw Error("No binding context for model '" + sModel + "' found!");
             }
             bindingContext.setProperty = setProperty.bind(bindingContext);
             return bindingContext;

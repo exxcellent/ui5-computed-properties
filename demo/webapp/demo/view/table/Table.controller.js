@@ -24,7 +24,7 @@ sap.ui.define([
             }), "local");
 
             DataService.loadData()
-                .then(data => this.setModel(new JSONModel(data)));
+                .then(function (data) { this.setModel(new JSONModel(data)) }.bind(this));
 
             this.addComputedProperties();
         },
@@ -32,15 +32,20 @@ sap.ui.define([
         addComputedProperties: function () {
             // count
             new ComputedPropertyBuilder(this, "local>/count")
-                .withFuncExpressionBinding(data => data.length, ["/data"])
+                .withFuncExpressionBinding(function (data) { return data.length; }, ["/data"])
                 .add();
 
             // wrappedData
-            const tempMap = this.createTempMap();
-            const wrappingFunction = list => list.map(it => ({
-                    obj: it,
-                    temp: tempMap.getOrCreate(it.login)
-                }));
+            var tempMap = this.createTempMap();
+            var wrappingFunction = function (list) {
+                return list.map(function (it) {
+                    return {
+                        obj: it,
+                        temp: tempMap.getOrCreate(it.login)
+                    };
+                });
+            }
+
             new ComputedPropertyBuilder(this, "local>/wrappedData")
                 .withFuncExpressionBinding(wrappingFunction, ["/data"])
                 .add();
@@ -48,15 +53,15 @@ sap.ui.define([
             // prettyEmail
             new ComputedPropertyBuilder(this, "local>temp/prettyEmail")
                 .withFuncExpressionBinding(
-                    (vorname, nachname, email) => `${vorname} ${nachname} <${email}>`,
+                    function (vorname, nachname, email) { return vorname + " " + nachname + " <" + email + ">"; },
                     ["local>obj/vorname", "local>obj/nachname", "local>obj/email"])
                 .addById("rowTemplate");
         },
 
         createTempMap: function () {
-            let map = {};
+            var map = {};
             return {
-                getOrCreate: key => {
+                getOrCreate: function (key) {
                     map[key] = map[key] || {};
                     return map[key];
                 }
@@ -64,27 +69,27 @@ sap.ui.define([
         },
 
         doAdd: function () {
-            const data = this.getModel().getProperty("/data");
-            const newData = data.concat([DataService.generateBenutzer()]);
+            var data = this.getModel().getProperty("/data");
+            var newData = data.concat([DataService.generateBenutzer()]);
             this.getModel().setProperty("/data", newData);
         },
 
         startEditing: function (oEvent) {
-            const bindingContext = this.getBindingContextForEvent(oEvent, "local");
-            const email = bindingContext.getProperty("obj/email");
+            var bindingContext = this.getBindingContextForEvent(oEvent, "local");
+            var email = bindingContext.getProperty("obj/email");
             bindingContext.setProperty("temp/editEmail", email);
             bindingContext.setProperty("temp/editMode", true);
         },
 
         saveChanges: function (oEvent) {
-            const bindingContext = this.getBindingContextForEvent(oEvent, "local");
-            const email = bindingContext.getProperty("temp/editEmail");
+            var bindingContext = this.getBindingContextForEvent(oEvent, "local");
+            var email = bindingContext.getProperty("temp/editEmail");
             bindingContext.setProperty("obj/email", email);
             bindingContext.setProperty("temp/editMode", false);
         },
 
         cancelEditing: function (oEvent) {
-            const bindingContext = this.getBindingContextForEvent(oEvent, "local");
+            var bindingContext = this.getBindingContextForEvent(oEvent, "local");
             bindingContext.setProperty("temp/editMode", false);
         }
     });

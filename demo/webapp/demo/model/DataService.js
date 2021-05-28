@@ -3,22 +3,22 @@ sap.ui.define([], function () {
     "use strict";
 
     function generateBenutzer() {
-        const name = randomEntry(nachnamen);
-        const vornamenList = randomEntry([vornamenM, vornamenW]);
-        const vorname = randomEntry(vornamenList);
-        const dob = randomTimestamp(new Date("1940-01-01"), new Date("2002-01-01"));
+        var name = randomEntry(nachnamen);
+        var vornamenList = randomEntry([vornamenM, vornamenW]);
+        var vorname = randomEntry(vornamenList);
+        var dob = randomTimestamp(new Date("1940-01-01"), new Date("2002-01-01"));
 
         return {
             "vorname": vorname,
             "nachname": name,
-            "login": `${vorname.toLowerCase()}.${name.toLowerCase()}`,
-            "email": `${vorname}.${name}@e-corp.com`,
+            "login": vorname.toLowerCase() + "." + name.toLowerCase(),
+            "email": vorname + "." + name + "@e-corp.com",
             "geburtsdatum": dob
         };
     }
 
     function randomEntry(elements) {
-        const index = Math.floor(Math.random() * elements.length);
+        var index = Math.floor(Math.random() * elements.length);
         return elements[index];
     }
 
@@ -27,7 +27,7 @@ sap.ui.define([], function () {
     }
 
     // Quelle: http://wiki-de.genealogy.net/Die_1000_häufigsten_Familiennamen_in_Deutschland
-    const nachnamen = [
+    var nachnamen = [
         "Müller",
         "Schmidt",
         "Schneider",
@@ -71,7 +71,7 @@ sap.ui.define([], function () {
         "Kaiser"
     ];
     // Quelle: https://www.beliebte-vornamen.de/jahrgang/j2013/top500-2013
-    const vornamenW = [
+    var vornamenW = [
         "Mia",
         "Emma",
         "Hannah",
@@ -93,7 +93,7 @@ sap.ui.define([], function () {
         "Nele",
         "Lara"
     ];
-    const vornamenM = [
+    var vornamenM = [
         "Ben",
         "Luca",
         "Paul",
@@ -119,12 +119,12 @@ sap.ui.define([], function () {
     return {
         generateBenutzer: generateBenutzer,
 
-        loadData: () => {
-            let array = [];
-            for (let i = 0; i < 10; i++) {
+        loadData: function () {
+            var array = [];
+            for (var i = 0; i < 10; i++) {
                 array.push(generateBenutzer());
             }
-            const result = {
+            var result = {
                 data: array
             }
             return Promise.resolve(result);

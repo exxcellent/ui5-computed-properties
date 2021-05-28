@@ -16,7 +16,7 @@ sap.ui.define([
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
 
-            const benutzer = DataService.generateBenutzer();
+            var benutzer = DataService.generateBenutzer();
 
             this.setModel(new JSONModel({
                 editMode: false
@@ -26,20 +26,20 @@ sap.ui.define([
         },
 
         startEditing: function () {
-            const current = this.getModel().getData();
+            var current = this.getModel().getData();
             this.getModel("backup").setData(deepClone(current));
             this.getModel("local").setProperty("/editMode", true);
         },
 
         saveChanges: function () {
-            const current = this.getModel().getData();
+            var current = this.getModel().getData();
             this.getModel("backup").setData(current);
             this.getModel("local").setProperty("/editMode", false);
         },
 
         cancelEditing: function () {
             this.getModel("local").setProperty("/editMode", false);
-            const backup = this.getModel("backup").getData();
+            var backup = this.getModel("backup").getData();
             this.getModel().setData(backup);
         }
     });

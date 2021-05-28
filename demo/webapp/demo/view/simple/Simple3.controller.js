@@ -18,7 +18,7 @@ sap.ui.define([
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
 
-            const benutzer = DataService.generateBenutzer();
+            var benutzer = DataService.generateBenutzer();
 
             this.setModel(new JSONModel({
                 editMode: false
@@ -30,26 +30,27 @@ sap.ui.define([
         },
 
         startEditing: function () {
-            const current = this.getModel().getData();
+            var current = this.getModel().getData();
             this.getModel("backup").setData(deepClone(current));
             this.getModel("local").setProperty("/editMode", true);
         },
 
         saveChanges: function () {
-            const current = this.getModel().getData();
+            var current = this.getModel().getData();
             this.getModel("backup").setData(current);
             this.getModel("local").setProperty("/editMode", false);
         },
 
         cancelEditing: function () {
             this.getModel("local").setProperty("/editMode", false);
-            const backup = this.getModel("backup").getData();
+            var backup = this.getModel("backup").getData();
             this.getModel().setData(backup);
         },
 
         addComputedProperties: function () {
-            const concatBenutzerFelder = (login, vorname, nachname, email) =>
-                `${login}_${vorname}_${nachname}_${email}`;
+            var concatBenutzerFelder = function (login, vorname, nachname, email) {
+                return login + "_" + vorname + "_" + nachname + "_" + email;
+            }
 
             new ComputedPropertyBuilder(this, "local>/currentHash")
                 .withFuncExpressionBinding(concatBenutzerFelder,
@@ -60,7 +61,7 @@ sap.ui.define([
                     ["backup>/login", "backup>/vorname", "backup>/nachname", "backup>/email"])
                 .add();
             new ComputedPropertyBuilder(this, "local>/changed")
-                .withFuncExpressionBinding((benutzerHash, origHash) => benutzerHash !== origHash,
+                .withFuncExpressionBinding(function (benutzerHash, origHash) { return benutzerHash !== origHash; },
                     ["local>/currentHash", "local>/backupHash"])
                 .add();
         }
