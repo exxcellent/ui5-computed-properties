@@ -26,42 +26,41 @@
                 columnsXL="1"
                 labelSpanM="4">
 
-            <Label text="Login"/>
+            <Label text="{i18n>user.login}"/>
             <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/login}"/>
 
-            <Label text="Vorname"/>
+            <Label text="{i18n>user.firstname}"/>
             <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/vorname}"/>
 
-            <Label text="Nachname"/>
+            <Label text="{i18n>user.familyname}"/>
             <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/nachname}"/>
 
-            <Label text="E-Mail"/>
+            <Label text="{i18n>user.email}"/>
             <Input valueLiveUpdate="true" enabled="{local>/editMode}" value="{/email}"/>
 
             <Label/>
-            <Button text="Editieren" press=".startEditing"
+            <Button text="{i18n>action.edit}" press=".startEditing"
                     visible="{= !%{local>/editMode} }" />
 
             <Label/>
             <!-- enabled if editMode && changed -->
-            <Button text="Speichern" press=".saveChanges"
+            <Button text="{i18n>action.save}" press=".saveChanges"
                     visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
             <!-- visible if editMode && changed -->
-            <Button text="Zurücksetzen" press=".cancelEditing"
+            <Button text="{i18n>action.reset}" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
 
             <Label/>
             <!-- visible if editMode && !changed -->
-            <Button text="Abbrechen" press=".cancelEditing"
+            <Button text="{i18n>action.cancel}" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp; !%{local>/changed} }" />
 
             <Label/>
             <!-- visible if editMode && changed -->
-            <Text class="red" text="Achtung: Die Änderungen sind noch nicht gespeichert."
+            <Text class="red" text="{i18n>info.unsavedChanges}"
                   visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
 
         </forms:SimpleForm>
-
 
     </Page>
 </mvc:View>

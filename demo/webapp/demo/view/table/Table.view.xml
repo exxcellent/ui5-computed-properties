@@ -18,7 +18,7 @@
         >
             <table:toolbar>
                 <Toolbar>
-                    <Title id="title" text="Benutzer"/>
+                    <Title id="title" text="{i18n>title.users}"/>
                     <Text text="{local>/count} rows"/>
                     <ToolbarSpacer/>
                     <ToolbarSpacer width="20px"/>
@@ -31,7 +31,7 @@
                         id="vorname"
                         width="11rem"
                         sortProperty="obj/vorname">
-                    <Label text="Vorname"/>
+                    <Label text="{i18n>user.firstname}"/>
                     <table:template>
                         <Text id="rowTemplate" text="{local>obj/vorname}"/>
                     </table:template>
@@ -40,7 +40,7 @@
                         id="nachname"
                         width="11rem"
                         sortProperty="obj/nachname">
-                    <Label text="Nachname"/>
+                    <Label text="{i18n>user.familyname}"/>
                     <table:template>
                         <Text text="{local>obj/nachname}"/>
                     </table:template>
@@ -49,7 +49,7 @@
                         id="email"
                         width="20rem"
                         sortProperty="obj/email">
-                    <Label text="E-Mail"/>
+                    <Label text="{i18n>user.email}"/>
                     <table:template>
                         <Text text="{local>obj/email}"/>
                     </table:template>
@@ -58,7 +58,7 @@
                         id="prettyEmail"
                         width="25rem"
                         sortProperty="temp/prettyEmail">
-                    <Label text="Pretty E-Mail"/>
+                    <Label text="{i18n>user.prettyemail}"/>
                     <table:template>
                         <Text text="{local>temp/prettyEmail}"/>
                     </table:template>
@@ -68,15 +68,15 @@
                         width="25rem">
                     <table:template>
                         <HBox>
-                            <Button text="Edit"
+                            <Button text="{i18n>action.edit}"
                                     visible="{= !%{local>temp/editMode} }"
                                     press=".startEditing"/>
                             <Input value="{local>temp/editEmail}"
                                    visible="{= !!%{local>temp/editMode} }"/>
-                            <Button text="Save"
+                            <Button text="{i18n>action.save}"
                                     visible="{= !!%{local>temp/editMode} }"
                                     press=".saveChanges"/>
-                            <Button text="Cancel"
+                            <Button text="{i18n>action.cancel}"
                                     visible="{= !!%{local>temp/editMode} }"
                                     press=".cancelEditing"/>
                         </HBox>
