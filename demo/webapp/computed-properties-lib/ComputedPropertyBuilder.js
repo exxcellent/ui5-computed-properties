@@ -13,9 +13,6 @@ sap.ui.define([
 
     return ManagedObject.extend("computed-properties-lib.ComputedPropertyBuilder", {
 
-        // TODO: Avoid ES6 in lib
-        // TODO: Linting
-
         constructor: function(oViewOrController, sVarName) {
             function getView(_oViewOrController) {
                 if (_oViewOrController && _oViewOrController.getMetadata().isA("sap.ui.core.mvc.View")) {
@@ -56,14 +53,15 @@ sap.ui.define([
                 throw new Error("Parameter aParams must be an array");
             }
 
-            const randomNr = Math.floor(Math.random() * 1000000);
-            const funcName = `${fFunc.name}_${randomNr}`;
-            const paramsString = aParams
-                .map(p => `%{${p}}`)
-                .join(",");
-            const oFuncModel = getAndInitFuncModel(this.oView, sFuncModelName);
+            var randomNr = Math.floor(Math.random() * 1000000);
+            var funcName = fFunc.name + "_" + randomNr;
+            var paramsString = aParams
+                .map(function (p) { return "%{" + p + "}"; })
+                .join(", ");
+            var oFuncModel = getAndInitFuncModel(this.oView, sFuncModelName);
             oFuncModel.setProperty("/" + funcName, fFunc);
-            return this.withExpressionBinding(`{= %{${sFuncModelName}>/${funcName}}(${paramsString}) }`);
+            // e.g. {= %{funcs>/f1}( %{v1}, %{v2} ) }
+            return this.withExpressionBinding("{= %{" + sFuncModelName + ">/" + funcName + "}( " + paramsString + " ) }");
         },
 
         withExpressionBinding: function (sExpressionBinding) {
@@ -75,23 +73,23 @@ sap.ui.define([
         },
 
         add: function () {
-            const oParentControl = this.oView.getContent()[0];
+            var oParentControl = this.oView.getContent()[0];
             this.addToSpecificElement(oParentControl);
         },
 
         addById: function (sId) {
-            const oParentControl = this.oView.byId(sId);
+            var oParentControl = this.oView.byId(sId);
             this.addToSpecificElement(oParentControl);
         },
 
         addToSpecificElement: function (oControl) {
-            const sVarBinding = `{${this.sVarName}}`;
-            const oConfig = {
+            var sVarBinding = "{" + this.sVarName + "}";
+            var oConfig = {
                 label: this.sVarName,
                 var: sVarBinding,
                 value: this.sExpressionBinding
             };
-            const oComputedProperty = new ComputedProperty(oConfig);
+            var oComputedProperty = new ComputedProperty(oConfig);
             Log.debug("Adding computed property '" + oConfig.label + "' with binding '" + oConfig.value + "'", null, "computed-property");
             oControl.addAggregation("dependents", oComputedProperty);
         }
