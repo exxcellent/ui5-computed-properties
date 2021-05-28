@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "ui5 serve -p 5001",
     "lint": "eslint webapp",
+    "clean": "rimraf dist",
     "dist": "rimraf dist && ui5 build --all",
     "serve-dist": "ui5 serve -p 5001 --config ui5-dist.yaml"
   },

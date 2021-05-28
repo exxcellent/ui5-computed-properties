@@ -1,7 +1,9 @@
 sap.ui.define([
-    "sap/ui/core/Element",
+    "sap/base/Log",
+    "sap/ui/core/Element"
 ], function (
-    Element,
+    Log,
+    Element
 ) {
     "use strict";
 
@@ -15,8 +17,11 @@ sap.ui.define([
         },
 
         setValue: function (value) {
-            this.setVar(value);
-            console.log(`Computed property (${this.getLabel()}) was updated to: ${value}`);
+            this.setProperty("value", value);
+            if (this.getProperty("var") !== value) {
+                this.setProperty("var", value);
+                Log.debug("Updating computed property '" + this.getLabel() + "' to: " + value, null, "computed-property");
+            }
         }
 
     });

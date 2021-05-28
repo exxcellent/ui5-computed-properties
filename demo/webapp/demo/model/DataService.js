@@ -1,8 +1,5 @@
-sap.ui.define([
-    "sap/ui/model/json/JSONModel"
-], function (
-    JSONModel
-) {
+/* eslint-disable no-use-before-define */
+sap.ui.define([], function () {
     "use strict";
 
     function generateBenutzer() {

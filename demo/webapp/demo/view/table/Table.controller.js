@@ -2,10 +2,12 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../BaseController",
     "ui5-demo/model/DataService",
+    "computed-properties-lib/ComputedPropertyBuilder"
 ], function (
     JSONModel,
     BaseController,
     DataService,
+    ComputedPropertyBuilder
 ) {
     "use strict";
 
@@ -29,10 +31,9 @@ sap.ui.define([
 
         addComputedProperties: function () {
             // count
-            this.addComputedProperty("local>/count",
-                this.buildFuncExpressionBinding(
-                    data => data.length,
-                    "/data"));
+            new ComputedPropertyBuilder(this, "local>/count")
+                .withFuncExpressionBinding(data => data.length, ["/data"])
+                .add();
 
             // wrappedData
             const tempMap = this.createTempMap();
@@ -40,14 +41,16 @@ sap.ui.define([
                     obj: it,
                     temp: tempMap.getOrCreate(it.login)
                 }));
-            this.addComputedProperty("local>/wrappedData",
-                this.buildFuncExpressionBinding(wrappingFunction, "/data"));
+            new ComputedPropertyBuilder(this, "local>/wrappedData")
+                .withFuncExpressionBinding(wrappingFunction, ["/data"])
+                .add();
 
             // prettyEmail
-            this.addComputedPropertyForElement(this.byId("rowTemplate"), "local>temp/prettyEmail",
-                this.buildFuncExpressionBinding(
+            new ComputedPropertyBuilder(this, "local>temp/prettyEmail")
+                .withFuncExpressionBinding(
                     (vorname, nachname, email) => `${vorname} ${nachname} <${email}>`,
-                    "local>obj/vorname", "local>obj/nachname", "local>obj/email"));
+                    ["local>obj/vorname", "local>obj/nachname", "local>obj/email"])
+                .addById("rowTemplate");
         },
 
         createTempMap: function () {
@@ -69,13 +72,13 @@ sap.ui.define([
         startEditing: function (oEvent) {
             const bindingContext = this.getBindingContextForEvent(oEvent, "local");
             const email = bindingContext.getProperty("obj/email");
-            bindingContext.setProperty("temp/email", email);
+            bindingContext.setProperty("temp/editEmail", email);
             bindingContext.setProperty("temp/editMode", true);
         },
 
         saveChanges: function (oEvent) {
             const bindingContext = this.getBindingContextForEvent(oEvent, "local");
-            const email = bindingContext.getProperty("temp/email");
+            const email = bindingContext.getProperty("temp/editEmail");
             bindingContext.setProperty("obj/email", email);
             bindingContext.setProperty("temp/editMode", false);
         },

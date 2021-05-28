@@ -1,11 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "computed-properties-lib/ComputedPropertyUtil",
+    "sap/ui/core/mvc/Controller"
 ], function (
-    Controller,
-    JSONModel,
-    ComputedPropertyUtil
+    Controller
 ) {
     "use strict";
 
@@ -60,20 +56,6 @@ sap.ui.define([
             }
             bindingContext.setProperty = setProperty.bind(bindingContext);
             return bindingContext;
-        },
-
-        addComputedProperty: function (varBinding, expressionBinding) {
-            const parentElement = this.getView().getContent()[0];
-            this.addComputedPropertyForElement(parentElement, varBinding, expressionBinding);
-        },
-        addComputedPropertyForElement: function (parentElement, varName, expressionBinding) {
-            ComputedPropertyUtil.addComputedProperty(parentElement, varName, expressionBinding);
-        },
-        buildFuncExpressionBinding: function (func, ...params) {
-            const funcModelName = "$funcs";
-            const funcModel = this.getModel(funcModelName) || new JSONModel({});
-            this.setModel(funcModel, funcModelName)
-            return ComputedPropertyUtil.buildFuncExpressionBinding(funcModel, funcModelName, func, ...params);
         }
 
     });

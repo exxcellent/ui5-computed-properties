@@ -13,8 +13,9 @@
     >
         <dependents>
             <cpl:ComputedProperty var="{local>/changed}"
-                                   value="{= %{/login}!==%{orig>/login} || %{/vorname}!==%{orig>/vorname} ||
-                                             %{/nachname}!==%{orig>/nachname} || %{/email}!==%{orig>/email} }"/>
+                                  label="local>/changed"
+                                  value="{= %{/login}!==%{backup>/login} || %{/vorname}!==%{backup>/vorname} ||
+                                            %{/nachname}!==%{backup>/nachname} || %{/email}!==%{backup>/email} }"/>
         </dependents>
 
         <forms:SimpleForm

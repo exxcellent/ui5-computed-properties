@@ -2,12 +2,12 @@ sap.ui.define([
     "sap/base/util/deepClone",
     "sap/ui/model/json/JSONModel",
     "../BaseController",
-    "ui5-demo/model/DataService",
+    "ui5-demo/model/DataService"
 ], function (
     deepClone,
     JSONModel,
     BaseController,
-    DataService,
+    DataService
 ) {
     "use strict";
 
@@ -16,30 +16,31 @@ sap.ui.define([
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
 
+            const benutzer = DataService.generateBenutzer();
+
             this.setModel(new JSONModel({
                 editMode: false
             }), "local");
-            this.setModel(new JSONModel({}), "orig");
-
-            const benutzer = DataService.generateBenutzer();
             this.setModel(new JSONModel(benutzer));
+            this.setModel(new JSONModel(benutzer), "backup");
         },
 
-        startEditing: function (oEvent) {
-            const orig = this.getModel().getData();
-            this.getModel("orig").setData(deepClone(orig));
+        startEditing: function () {
+            const current = this.getModel().getData();
+            this.getModel("backup").setData(deepClone(current));
             this.getModel("local").setProperty("/editMode", true);
         },
 
-        saveChanges: function (oEvent) {
-            // Saving..
+        saveChanges: function () {
+            const current = this.getModel().getData();
+            this.getModel("backup").setData(current);
             this.getModel("local").setProperty("/editMode", false);
         },
 
-        cancelEditing: function (oEvent) {
+        cancelEditing: function () {
             this.getModel("local").setProperty("/editMode", false);
-            const orig = this.getModel("orig").getData();
-            this.getModel().setData(orig);
+            const backup = this.getModel("backup").getData();
+            this.getModel().setData(backup);
         }
     });
 });

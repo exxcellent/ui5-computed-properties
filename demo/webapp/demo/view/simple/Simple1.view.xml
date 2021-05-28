@@ -38,26 +38,25 @@
             <!-- enabled if editMode && changed -->
             <Button text="Speichern" press=".saveChanges"
                     visible="{= %{local>/editMode} &amp;&amp;
-                             (%{/login}!==%{orig>/login}||%{/vorname}!==%{orig>/vorname}||%{/nachname}!==%{orig>/nachname}||%{/email}!==%{orig>/email}) }" />
+                             (%{/login}!==%{backup>/login}||%{/vorname}!==%{backup>/vorname}||%{/nachname}!==%{backup>/nachname}||%{/email}!==%{backup>/email}) }" />
             <!-- visible if editMode && changed -->
             <Button text="Zurücksetzen" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp;
-                             (%{/login}!==%{orig>/login}||%{/vorname}!==%{orig>/vorname}||%{/nachname}!==%{orig>/nachname}||%{/email}!==%{orig>/email}) }" />
+                             (%{/login}!==%{backup>/login}||%{/vorname}!==%{backup>/vorname}||%{/nachname}!==%{backup>/nachname}||%{/email}!==%{backup>/email}) }" />
 
             <Label/>
             <!-- visible if editMode && !changed -->
             <Button text="Abbrechen" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp;
-                             !(%{/login}!==%{orig>/login}||%{/vorname}!==%{orig>/vorname}||%{/nachname}!==%{orig>/nachname}||%{/email}!==%{orig>/email}) }" />
+                             !(%{/login}!==%{backup>/login}||%{/vorname}!==%{backup>/vorname}||%{/nachname}!==%{backup>/nachname}||%{/email}!==%{backup>/email}) }" />
 
             <Label/>
             <!-- visible if editMode && changed -->
             <Text class="red" text="Achtung: Die Änderungen sind noch nicht gespeichert."
                   visible="{= %{local>/editMode} &amp;&amp;
-                             (%{/login}!==%{orig>/login}||%{/vorname}!==%{orig>/vorname}||%{/nachname}!==%{orig>/nachname}||%{/email}!==%{orig>/email}) }" />
+                             (%{/login}!==%{backup>/login}||%{/vorname}!==%{backup>/vorname}||%{/nachname}!==%{backup>/nachname}||%{/email}!==%{backup>/email}) }" />
 
         </forms:SimpleForm>
-
 
     </Page>
 </mvc:View>

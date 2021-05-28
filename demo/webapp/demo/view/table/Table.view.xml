@@ -14,7 +14,7 @@
         <table:Table id="BenutzerTable"
                      selectionMode="None"
                      visibleRowCountMode="Auto"
-                     rows="{local>/wrappedData}"
+                     rows="{path:'local>/wrappedData', templateShareable:false}"
         >
             <table:toolbar>
                 <Toolbar>
@@ -71,7 +71,7 @@
                             <Button text="Edit"
                                     visible="{= !%{local>temp/editMode} }"
                                     press=".startEditing"/>
-                            <Input value="{local>temp/email}"
+                            <Input value="{local>temp/editEmail}"
                                    visible="{= !!%{local>temp/editMode} }"/>
                             <Button text="Save"
                                     visible="{= !!%{local>temp/editMode} }"

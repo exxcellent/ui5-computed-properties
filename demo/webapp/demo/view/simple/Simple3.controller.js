@@ -3,11 +3,13 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../BaseController",
     "ui5-demo/model/DataService",
+    "computed-properties-lib/ComputedPropertyBuilder"
 ], function (
     deepClone,
     JSONModel,
     BaseController,
     DataService,
+    ComputedPropertyBuilder
 ) {
     "use strict";
 
@@ -16,46 +18,51 @@ sap.ui.define([
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
 
+            const benutzer = DataService.generateBenutzer();
+
             this.setModel(new JSONModel({
                 editMode: false
             }), "local");
-            this.setModel(new JSONModel({}), "orig");
-
-            const benutzer = DataService.generateBenutzer();
             this.setModel(new JSONModel(benutzer));
+            this.setModel(new JSONModel(benutzer), "backup");
 
-            const concatBenutzerFelder = (login, vorname, nachname, email) =>
-                `${login}_${vorname}_${nachname}_${email}`;
-
-            this.addComputedProperty("local>/benutzerHash",
-                this.buildFuncExpressionBinding(
-                    concatBenutzerFelder,
-                    "/login", "/vorname", "/nachname", "/email"));
-            this.addComputedProperty("local>/origHash",
-                this.buildFuncExpressionBinding(
-                    concatBenutzerFelder,
-                    "orig>/login", "orig>/vorname", "orig>/nachname", "orig>/email"));
-            this.addComputedProperty("local>/changed",
-                this.buildFuncExpressionBinding(
-                    (benutzerHash, origHash) => benutzerHash !== origHash,
-                    "local>/benutzerHash", "local>/origHash"));
+            this.addComputedProperties();
         },
 
-        startEditing: function (oEvent) {
-            const orig = this.getModel().getData();
-            this.getModel("orig").setData(deepClone(orig));
+        startEditing: function () {
+            const current = this.getModel().getData();
+            this.getModel("backup").setData(deepClone(current));
             this.getModel("local").setProperty("/editMode", true);
         },
 
-        saveChanges: function (oEvent) {
-            // Saving..
+        saveChanges: function () {
+            const current = this.getModel().getData();
+            this.getModel("backup").setData(current);
             this.getModel("local").setProperty("/editMode", false);
         },
 
-        cancelEditing: function (oEvent) {
+        cancelEditing: function () {
             this.getModel("local").setProperty("/editMode", false);
-            const orig = this.getModel("orig").getData();
-            this.getModel().setData(orig);
+            const backup = this.getModel("backup").getData();
+            this.getModel().setData(backup);
+        },
+
+        addComputedProperties: function () {
+            const concatBenutzerFelder = (login, vorname, nachname, email) =>
+                `${login}_${vorname}_${nachname}_${email}`;
+
+            new ComputedPropertyBuilder(this, "local>/currentHash")
+                .withFuncExpressionBinding(concatBenutzerFelder,
+                    ["/login", "/vorname", "/nachname", "/email"])
+                .add();
+            new ComputedPropertyBuilder(this, "local>/backupHash")
+                .withFuncExpressionBinding(concatBenutzerFelder,
+                    ["backup>/login", "backup>/vorname", "backup>/nachname", "backup>/email"])
+                .add();
+            new ComputedPropertyBuilder(this, "local>/changed")
+                .withFuncExpressionBinding((benutzerHash, origHash) => benutzerHash !== origHash,
+                    ["local>/currentHash", "local>/backupHash"])
+                .add();
         }
     });
 });
