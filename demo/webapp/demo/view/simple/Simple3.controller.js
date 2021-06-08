@@ -53,15 +53,15 @@ sap.ui.define([
             }
 
             new ComputedPropertyBuilder(this, "local>/currentHash")
-                .withFuncExpressionBinding(concatBenutzerFelder,
+                .withFunction(concatBenutzerFelder,
                     ["/login", "/vorname", "/nachname", "/email"])
                 .add();
             new ComputedPropertyBuilder(this, "local>/backupHash")
-                .withFuncExpressionBinding(concatBenutzerFelder,
+                .withFunction(concatBenutzerFelder,
                     ["backup>/login", "backup>/vorname", "backup>/nachname", "backup>/email"])
                 .add();
             new ComputedPropertyBuilder(this, "local>/changed")
-                .withFuncExpressionBinding(function (benutzerHash, origHash) { return benutzerHash !== origHash; },
+                .withFunction(function (benutzerHash, origHash) { return benutzerHash !== origHash; },
                     ["local>/currentHash", "local>/backupHash"])
                 .add();
         }

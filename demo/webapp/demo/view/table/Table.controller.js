@@ -32,7 +32,7 @@ sap.ui.define([
         addComputedProperties: function () {
             // count
             new ComputedPropertyBuilder(this, "local>/count")
-                .withFuncExpressionBinding(function (data) { return data.length; }, ["/data"])
+                .withFunction(function (data) { return data.length; }, ["/data"])
                 .add();
 
             // wrappedData
@@ -47,12 +47,12 @@ sap.ui.define([
             }
 
             new ComputedPropertyBuilder(this, "local>/wrappedData")
-                .withFuncExpressionBinding(wrappingFunction, ["/data"])
+                .withFunction(wrappingFunction, ["/data"])
                 .add();
 
             // prettyEmail
             new ComputedPropertyBuilder(this, "local>temp/prettyEmail")
-                .withFuncExpressionBinding(
+                .withFunction(
                     function (vorname, nachname, email) { return vorname + " " + nachname + " <" + email + ">"; },
                     ["local>obj/vorname", "local>obj/nachname", "local>obj/email"])
                 .addById("rowTemplate");
