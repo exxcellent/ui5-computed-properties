@@ -8,7 +8,7 @@
           showHeader="true"
           showFooter="false"
           enableScrolling="false"
-          title="Table"
+          title="{i18n>page.table}"
     >
 
         <table:Table id="BenutzerTable"

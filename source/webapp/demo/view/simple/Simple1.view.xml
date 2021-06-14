@@ -8,7 +8,7 @@
           showHeader="true"
           showFooter="false"
           enableScrolling="false"
-          title="Simple1"
+          title="{i18n>page.simple1}"
     >
         <forms:SimpleForm
                 width="700px"

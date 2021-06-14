@@ -9,7 +9,7 @@
           showHeader="true"
           showFooter="false"
           enableScrolling="false"
-          title="Simple2"
+          title="{i18n>page.simple2}"
     >
         <dependents>
             <cpl:ComputedProperty var="{local>/changed}"

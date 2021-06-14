@@ -10,23 +10,23 @@
 
             <OverflowToolbar class="">
                 <ToolbarSpacer width="50px"/>
-                <Button text="Simple1" type="Transparent" press="onNav">
+                <Button text="{i18n>page.simple1}" type="Transparent" press="onNav">
                     <customData>
                         <core:CustomData key="dest" value="simple1"/>
                     </customData>
                 </Button>
-                <Button text="Simple2" type="Transparent" press="onNav">
+                <Button text="{i18n>page.simple2}" type="Transparent" press="onNav">
                     <customData>
                         <core:CustomData key="dest" value="simple2"/>
                     </customData>
                 </Button>
-                <Button text="Simple3" type="Transparent" press="onNav">
+                <Button text="{i18n>page.simple3}" type="Transparent" press="onNav">
                     <customData>
                         <core:CustomData key="dest" value="simple3"/>
                     </customData>
                 </Button>
                 <ToolbarSpacer width="50px"/>
-                <Button text="Table" type="Transparent" press="onNav">
+                <Button text="{i18n>page.table}" type="Transparent" press="onNav">
                     <customData>
                         <core:CustomData key="dest" value="table"/>
                     </customData>
