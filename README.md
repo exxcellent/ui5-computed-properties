@@ -4,7 +4,7 @@
 You find the PDFs in the presentation folder.
 
 ## Demo
-* Go to directory: demo
+* Go to directory: source
 * Run: npm install
 * Run: npm run serve
 * Alternatively run: npm run dist && npm run serve-dist 
