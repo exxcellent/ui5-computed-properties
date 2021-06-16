@@ -11,6 +11,13 @@ sap.ui.define([
 ) {
     "use strict";
 
+    /**
+     * This is a very simple editor with 4 text inputs and a couple of buttons.
+     * Some controls are shown/hidden when edit mode is activated and any of the inputs are changed.
+     *
+     * It's implemented in the corresponding view using the 'ComputedProperty' element from this library.
+     * This allows reusing parts of the visibility logic.
+     */
     return BaseController.extend("ui5-demo.view.simple.Simple2", {
 
         onInit: function () {

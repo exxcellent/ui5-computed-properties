@@ -13,6 +13,13 @@ sap.ui.define([
 ) {
     "use strict";
 
+    /**
+     * This is a very simple editor with 4 text inputs and a couple of buttons.
+     * Some controls are shown/hidden when edit mode is activated and any of the inputs are changed.
+     *
+     * It's implemented in this controller using the 'ComputedPropertyBuilder' from this library.
+     * This allows reusing parts of the visibility logic and keeping it out of the view.
+     */
     return BaseController.extend("ui5-demo.view.simple.Simple3", {
 
         onInit: function () {
@@ -52,14 +59,17 @@ sap.ui.define([
                 return login + "_" + vorname + "_" + nachname + "_" + email;
             }
 
+            // ComputedProperty 'local>/currentHash' is added to the root of the view
             new ComputedPropertyBuilder(this, "local>/currentHash")
                 .withFunction(concatBenutzerFelder,
                     ["/login", "/vorname", "/nachname", "/email"])
                 .add();
+            // ComputedProperty 'local>/backupHash' is added to the root of the view
             new ComputedPropertyBuilder(this, "local>/backupHash")
                 .withFunction(concatBenutzerFelder,
                     ["backup>/login", "backup>/vorname", "backup>/nachname", "backup>/email"])
                 .add();
+            // ComputedProperty 'local>/changed' is calculated using the other two ComputedProperties
             new ComputedPropertyBuilder(this, "local>/changed")
                 .withFunction(function (benutzerHash, origHash) { return benutzerHash !== origHash; },
                     ["local>/currentHash", "local>/backupHash"])

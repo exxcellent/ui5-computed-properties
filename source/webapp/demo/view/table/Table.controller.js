@@ -30,12 +30,14 @@ sap.ui.define([
         },
 
         addComputedProperties: function () {
-            // count
+            // ComputedProperty which counts the entries in data.
             new ComputedPropertyBuilder(this, "local>/count")
                 .withFunction(function (data) { return data.length; }, ["/data"])
                 .add();
 
-            // wrappedData
+            // ComputedProperty 'local>/wrappedData' is a transformation of 'local>/data' combining references to
+            // the original objects with temporary data. To preserve the temporary data when the ComputedProperty is
+            // recalculated, a temporary map indexed by 'login' key is used.
             var tempMap = this.createTempMap();
             var wrappingFunction = function (list) {
                 return list.map(function (it) {
@@ -45,12 +47,12 @@ sap.ui.define([
                     };
                 });
             }
-
             new ComputedPropertyBuilder(this, "local>/wrappedData")
                 .withFunction(wrappingFunction, ["/data"])
                 .add();
 
-            // prettyEmail
+            // ComputedProperty 'prettyEmail' is defined relative to each row entry.
+            // Therefore the ComputedProperty element is added to the row template.
             new ComputedPropertyBuilder(this, "local>temp/prettyEmail")
                 .withFunction(
                     function (vorname, nachname, email) { return vorname + " " + nachname + " <" + email + ">"; },
@@ -70,6 +72,8 @@ sap.ui.define([
 
         doAdd: function () {
             var data = this.getModel().getProperty("/data");
+            // It's important to really update the '/data' property for the ComputedProperty defined from it to work.
+            // Therefore we don't use  .push(..) which would modify the list in-place, but .concat(..).
             var newData = data.concat([DataService.generateBenutzer()]);
             this.getModel().setProperty("/data", newData);
         },

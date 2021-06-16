@@ -29,7 +29,7 @@
             <table:columns>
                 <table:Column
                         id="vorname"
-                        width="11rem"
+                        width="9rem"
                         sortProperty="obj/vorname">
                     <Label text="{i18n>user.firstname}"/>
                     <table:template>
@@ -38,7 +38,7 @@
                 </table:Column>
                 <table:Column
                         id="nachname"
-                        width="11rem"
+                        width="9rem"
                         sortProperty="obj/nachname">
                     <Label text="{i18n>user.familyname}"/>
                     <table:template>
@@ -47,7 +47,7 @@
                 </table:Column>
                 <table:Column
                         id="email"
-                        width="20rem"
+                        width="16rem"
                         sortProperty="obj/email">
                     <Label text="{i18n>user.email}"/>
                     <table:template>
@@ -65,13 +65,14 @@
                 </table:Column>
                 <table:Column
                         id="actions"
-                        width="25rem">
+                        width="24rem">
                     <table:template>
                         <HBox>
                             <Button text="{i18n>action.edit}"
                                     visible="{= !%{local>temp/editMode} }"
                                     press=".startEditing"/>
                             <Input value="{local>temp/editEmail}"
+                                   width="16rem"
                                    visible="{= !!%{local>temp/editMode} }"/>
                             <Button text="{i18n>action.save}"
                                     visible="{= !!%{local>temp/editMode} }"

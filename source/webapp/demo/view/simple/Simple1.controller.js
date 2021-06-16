@@ -11,6 +11,14 @@ sap.ui.define([
 ) {
     "use strict";
 
+    /**
+     * This is a very simple editor with 4 text inputs and a couple of buttons.
+     * Some controls are shown/hidden when edit mode is activated and the inputs are changed.
+     *
+     * It's implemented in the corresponding view with expression bindings which check the flag 'local>/editMode'
+     * and compare '/login' against 'backup>/login' etc.
+     * This is verbose, not very readable and parts of the calculation must be duplicated.
+     */
     return BaseController.extend("ui5-demo.view.simple.Simple1", {
 
         onInit: function () {

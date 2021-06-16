@@ -33,11 +33,6 @@ sap.ui.define([
         metadata: {
             properties: {
                 /**
-                 * Used for log message.
-                 */
-                label: {type: "string"},
-
-                /**
                  * Binding for computed property "variable", evaluation result of 'value' is stored here.
                  */
                 var: {type: "any"},
@@ -45,7 +40,12 @@ sap.ui.define([
                 /**
                  * Binding for value that gets evaluated. Its result is propagated to 'var'.
                  */
-                value: {type: "any"}
+                value: {type: "any"},
+
+                /**
+                 * Optional, only used for log messages.
+                 */
+                label: {type: "string"}
             }
         },
 
@@ -58,7 +58,7 @@ sap.ui.define([
             this.setProperty("value", value);
             if (this.getProperty("var") !== value) {
                 this.setProperty("var", value);
-                Log.debug("Updating computed property '" + this.getLabel() + "' to: " + value, null, "computed-property");
+                Log.debug("Updating computed property '" + this.getLabel() + "' to: " + JSON.stringify(value), null, "computed-property");
             }
         }
 

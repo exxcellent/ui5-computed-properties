@@ -35,20 +35,20 @@
                     visible="{= !%{local>/editMode} }" />
 
             <Label/>
-            <!-- enabled if editMode && changed -->
+            <!-- enabled if editMode && changed (ComputedProperty!) -->
             <Button text="{i18n>action.save}" press=".saveChanges"
                     visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
-            <!-- visible if editMode && changed -->
+            <!-- visible if editMode && changed (ComputedProperty!) -->
             <Button text="{i18n>action.reset}" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
 
             <Label/>
-            <!-- visible if editMode && !changed -->
+            <!-- visible if editMode && !changed (ComputedProperty!) -->
             <Button text="{i18n>action.cancel}" press=".cancelEditing"
                     visible="{= %{local>/editMode} &amp;&amp; !%{local>/changed} }" />
 
             <Label/>
-            <!-- visible if editMode && changed -->
+            <!-- visible if editMode && changed (ComputedProperty!) -->
             <Text class="red" text="{i18n>info.unsavedChanges}"
                   visible="{= %{local>/editMode} &amp;&amp; %{local>/changed} }" />
 
