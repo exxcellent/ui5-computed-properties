@@ -35,7 +35,7 @@
                     visible="{= !%{local>/editMode} }" />
 
             <Label/>
-            <!-- enabled if editMode && changed -->
+            <!-- visible if editMode && changed -->
             <Button text="{i18n>action.save}" press=".saveChanges"
                     visible="{= %{local>/editMode} &amp;&amp;
                              (%{/login}!==%{backup>/login}||%{/vorname}!==%{backup>/vorname}||%{/nachname}!==%{backup>/nachname}||%{/email}!==%{backup>/email}) }" />
